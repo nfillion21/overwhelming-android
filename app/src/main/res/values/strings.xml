@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Overwhelming</string>
+    <string name="content_description">Content description</string>
 </resources>
