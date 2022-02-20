@@ -14,6 +14,8 @@ object Dependencies {
     val uiToolingCompose by lazy { "androidx.compose.ui:ui-tooling:${Versions.composeVersion}" }
     val runtimeLiveData by lazy { "androidx.compose.runtime:runtime-livedata:${Versions.composeVersion}"}
 
+    val iconsExtended by lazy {"androidx.compose.material:material-icons-extended:${Versions.composeVersion}"}
+
     val lifecycleRuntime by lazy {"androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycleAndroidX}"}
     val lifecycleLivedata by lazy {"androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycleAndroidX}"}
     val lifecycleViewModel by lazy {"androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleAndroidX}"}

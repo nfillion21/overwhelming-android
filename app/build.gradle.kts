@@ -66,6 +66,7 @@ dependencies {
     implementation (Dependencies.materialCompose)
     implementation (Dependencies.uiToolingPreviewCompose)
     implementation(Dependencies.runtimeLiveData)
+    implementation (Dependencies.iconsExtended)
     androidTestImplementation (Dependencies.uiTestJUnit4Compose)
     debugImplementation (Dependencies.uiToolingCompose)
 
