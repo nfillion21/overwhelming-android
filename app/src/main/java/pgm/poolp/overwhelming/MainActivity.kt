@@ -31,15 +31,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             OverwhelmingTheme {
-                // A surface container using the 'background' color from the theme
-                /*
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting("Android")
-                }
-                */
                 Scaffold(
                     backgroundColor = MaterialTheme.colors.primarySurface,
                     topBar = {
@@ -62,6 +53,8 @@ private fun HomeTopAppBar(
 ) {
     val title = stringResource(id = R.string.app_name)
     TopAppBar(
+        backgroundColor = MaterialTheme.colors.primaryVariant,
+        elevation = elevation,
         title = {
 
             Row(
@@ -69,62 +62,60 @@ private fun HomeTopAppBar(
                 horizontalArrangement = Arrangement.Start
             ) {
                 Icon(
-                    painter = rememberVectorPainter(Icons.TwoTone.LocalPizza),
+                    painter = rememberVectorPainter(Icons.Outlined.LocalPizza),
                     contentDescription = title,
                     tint = MaterialTheme.colors.onBackground,
                     modifier = Modifier
                 )
                 Icon(
-                    painter = rememberVectorPainter(Icons.TwoTone.Cake),
+                    painter = rememberVectorPainter(Icons.Outlined.Cake),
                     contentDescription = title,
                     tint = MaterialTheme.colors.onBackground,
                     modifier = Modifier
                 )
                 Icon(
-                    painter = rememberVectorPainter(Icons.TwoTone.LunchDining),
+                    painter = rememberVectorPainter(Icons.Outlined.LunchDining),
                     contentDescription = title,
                     tint = MaterialTheme.colors.onBackground,
                     modifier = Modifier
                 )
                 Icon(
-                    painter = rememberVectorPainter(Icons.TwoTone.Coffee),
+                    painter = rememberVectorPainter(Icons.Outlined.Coffee),
                     contentDescription = title,
                     tint = MaterialTheme.colors.onBackground,
                     modifier = Modifier
                 )
                 Icon(
-                    painter = rememberVectorPainter(Icons.TwoTone.RamenDining),
+                    painter = rememberVectorPainter(Icons.Outlined.RamenDining),
                     contentDescription = title,
                     tint = MaterialTheme.colors.onBackground,
                     modifier = Modifier
                 )
                 Icon(
-                    painter = rememberVectorPainter(Icons.TwoTone.BakeryDining),
+                    painter = rememberVectorPainter(Icons.Outlined.BakeryDining),
                     contentDescription = title,
                     tint = MaterialTheme.colors.onBackground,
                     modifier = Modifier
                 )
                 Icon(
-                    painter = rememberVectorPainter(Icons.TwoTone.Icecream),
+                    painter = rememberVectorPainter(Icons.Outlined.Icecream),
                     contentDescription = title,
                     tint = MaterialTheme.colors.onBackground,
                     modifier = Modifier
                 )
                 Icon(
-                    painter = rememberVectorPainter(Icons.TwoTone.RiceBowl),
+                    painter = rememberVectorPainter(Icons.Outlined.RiceBowl),
                     contentDescription = title,
                     tint = MaterialTheme.colors.onBackground,
                     modifier = Modifier
                 )
                 Icon(
-                    painter = rememberVectorPainter(Icons.TwoTone.EmojiFoodBeverage),
+                    painter = rememberVectorPainter(Icons.Outlined.EmojiFoodBeverage),
                     contentDescription = title,
                     tint = MaterialTheme.colors.onBackground,
                     modifier = Modifier
                 )
             }
-        },
-        backgroundColor = MaterialTheme.colors.surface,
-        elevation = elevation
+        }
     )
 }

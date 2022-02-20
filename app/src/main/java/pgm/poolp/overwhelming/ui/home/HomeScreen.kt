@@ -2,19 +2,23 @@ package pgm.poolp.overwhelming.ui.home
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.twotone.RamenDining
+import androidx.compose.material.icons.rounded.Coffee
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.Layout
@@ -31,20 +35,13 @@ private val screens = listOf("", "", "", "", "","", "", "", "", "","", "", "", "
 fun HomeScreen(
     modifier: Modifier
 ) {
-    /*
-    Column(modifier = modifier.statusBarsPadding()) {
-
-        LazyColumn() {
-        }
-    }
-    */
     Column(
         modifier = modifier
             .verticalScroll(rememberScrollState())
             .statusBarsPadding()
     ) {
         StaggeredVerticalGrid(
-            maxColumnWidth = 48.dp,
+            maxColumnWidth = 64.dp,
             modifier = modifier.padding(24.dp)
         ) {
             screens.forEach { foodItem ->
@@ -60,15 +57,22 @@ fun FoodItem(
 ) {
     Surface(
         modifier = modifier.padding(4.dp),
-        color = MaterialTheme.colors.surface,
+        //color = MaterialTheme.colors.surface,
+        /*
+        border = BorderStroke(
+            width = 1.dp,
+            color = Color.LightGray
+        ),
+         */
         //elevation = OwlTheme.elevations.card,
         shape = MaterialTheme.shapes.medium
     )  {
         Icon(
-            painter = rememberVectorPainter(Icons.TwoTone.RamenDining),
+            painter = rememberVectorPainter(Icons.Rounded.Coffee),
             contentDescription = stringResource(id = R.string.content_description),
-            tint = MaterialTheme.colors.onBackground,
-            modifier = Modifier
+            tint = MaterialTheme.colors.onPrimary,
+            modifier = Modifier.background(MaterialTheme.colors.primary)
+                //.size(32.dp)
         )
     }
 }
