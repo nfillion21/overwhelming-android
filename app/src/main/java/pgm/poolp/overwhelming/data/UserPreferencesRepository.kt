@@ -63,9 +63,6 @@ class UserPreferencesRepository @Inject constructor(private val dataStore: DataS
         }
     }
 
-    suspend fun fetchInitialPreferences() =
-        mapUserPreferences(dataStore.data.first().toPreferences())
-
     private fun mapUserPreferences(preferences: Preferences): UserPreferences {
         val foodOccurrences = preferences[PreferencesKeys.FOOD_OCCURENCES] ?: 0
         return UserPreferences(foodOccurrences)
