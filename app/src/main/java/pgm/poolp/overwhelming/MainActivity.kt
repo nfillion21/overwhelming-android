@@ -23,9 +23,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import dagger.hilt.android.AndroidEntryPoint
 import pgm.poolp.overwhelming.ui.home.HomeScreen
 import pgm.poolp.overwhelming.ui.theme.OverwhelmingTheme
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

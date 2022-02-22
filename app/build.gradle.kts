@@ -94,4 +94,6 @@ dependencies {
     implementation (Dependencies.coilCompose)
 
     implementation (Dependencies.appCompat)
+
+    implementation (Dependencies.datastorePreferences)
 }

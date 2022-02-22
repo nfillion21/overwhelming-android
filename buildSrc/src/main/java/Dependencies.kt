@@ -46,6 +46,7 @@ object Dependencies {
 
     val appCompat by lazy {"androidx.appcompat:appcompat:${Versions.appCompat}"}
 
+    val datastorePreferences by lazy {"androidx.datastore:datastore-preferences:${Versions.datastoreVersion}"}
 
     //annotationProcessor("androidx.room:room-compiler:$roomVersion")
 

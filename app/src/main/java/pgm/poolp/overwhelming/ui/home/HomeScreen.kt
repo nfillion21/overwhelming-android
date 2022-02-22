@@ -57,14 +57,6 @@ fun FoodItem(
 ) {
     Surface(
         modifier = modifier.padding(4.dp),
-        //color = MaterialTheme.colors.surface,
-        /*
-        border = BorderStroke(
-            width = 1.dp,
-            color = Color.LightGray
-        ),
-         */
-        //elevation = OwlTheme.elevations.card,
         shape = MaterialTheme.shapes.medium
     )  {
         Icon(
