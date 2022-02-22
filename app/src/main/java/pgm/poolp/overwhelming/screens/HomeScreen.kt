@@ -14,12 +14,13 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.rounded.Coffee
+import androidx.compose.material.icons.rounded.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.res.stringResource
@@ -28,8 +29,6 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.statusBarsPadding
 import pgm.poolp.overwhelming.R
 import kotlin.math.ceil
-
-//private val screens = listOf("", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "","", "", "", "", "", "", "", "", "", "", "", "", "",)
 
 @Composable
 fun HomeScreen(
@@ -44,7 +43,7 @@ fun HomeScreen(
             maxColumnWidth = 64.dp,
             modifier = modifier.padding(24.dp)
         ) {
-            var x = 10
+            var x = 20
             while (x > 0) {
                 x--
                 FoodItem()
@@ -61,8 +60,21 @@ fun FoodItem(
         modifier = modifier.padding(4.dp),
         shape = MaterialTheme.shapes.medium
     )  {
+
+        val imageVector:ImageVector = when ((0..7).random()) {
+            0 -> Icons.Rounded.LocalPizza
+            1 -> Icons.Rounded.Cake
+            2 -> Icons.Rounded.LunchDining
+            3 -> Icons.Rounded.Coffee
+            4 -> Icons.Rounded.BakeryDining
+            5 -> Icons.Rounded.Icecream
+            6 -> Icons.Rounded.RiceBowl
+            7 -> Icons.Rounded.EmojiFoodBeverage
+            else -> {Icons.Rounded.Coffee}
+        }
+
         Icon(
-            painter = rememberVectorPainter(Icons.Rounded.Coffee),
+            painter = rememberVectorPainter(imageVector),
             contentDescription = stringResource(id = R.string.content_description),
             tint = MaterialTheme.colors.onPrimary,
             modifier = Modifier.background(MaterialTheme.colors.primary)
