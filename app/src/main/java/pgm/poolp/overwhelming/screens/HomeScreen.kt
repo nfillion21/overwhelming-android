@@ -1,24 +1,23 @@
-package pgm.poolp.overwhelming.ui.home
+package pgm.poolp.overwhelming.screens
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.rounded.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
@@ -26,26 +25,32 @@ import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.asLiveData
 import com.google.accompanist.insets.statusBarsPadding
 import pgm.poolp.overwhelming.R
+import pgm.poolp.overwhelming.viewmodels.FoodViewModel
 import kotlin.math.ceil
 
 @Composable
 fun HomeScreen(
+    viewModel: FoodViewModel,
     modifier: Modifier
 ) {
     Column(
         modifier = modifier
             .verticalScroll(rememberScrollState())
             .statusBarsPadding()
+            .fillMaxSize()
     ) {
         StaggeredVerticalGrid(
             maxColumnWidth = 64.dp,
-            modifier = modifier.padding(24.dp)
+            modifier = modifier
+                .padding(24.dp)
+                //.weight(1f)
         ) {
-            var x = 20
-            while (x > 0) {
-                x--
+            val k by viewModel.foodOccurrences.collectAsState(initial = 0)
+            for (i in k downTo 1)
+            {
                 FoodItem()
             }
         }
@@ -68,7 +73,7 @@ fun FoodItem(
             3 -> Icons.Rounded.Coffee
             4 -> Icons.Rounded.BakeryDining
             5 -> Icons.Rounded.Icecream
-            6 -> Icons.Rounded.RiceBowl
+            6 -> Icons.Rounded.BreakfastDining
             7 -> Icons.Rounded.EmojiFoodBeverage
             else -> {Icons.Rounded.Coffee}
         }

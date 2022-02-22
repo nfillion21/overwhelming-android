@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import pgm.poolp.overwhelming.data.UserPreferences
 import pgm.poolp.overwhelming.data.UserPreferencesRepository
 import javax.inject.Inject
 
@@ -22,10 +21,9 @@ class FoodViewModel @Inject internal constructor(
 
     fun increaseFoodOccurrencesWithTen() {
         viewModelScope.launch {
-            userPreferencesRepository.decreaseFoodOccurrences()
+            userPreferencesRepository.increaseFoodOccurrencesWithTen()
         }
     }
 
-    //TODO check to put it back as an integer. maybe back to liveData.
-    val foodOccurrences:Flow<UserPreferences> = userPreferencesRepository.userPreferencesFlow
+    val foodOccurrences:Flow<Int> = userPreferencesRepository.foodOccurrencesFlow
 }

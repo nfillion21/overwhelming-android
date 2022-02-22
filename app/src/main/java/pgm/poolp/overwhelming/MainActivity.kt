@@ -5,44 +5,70 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.LocalPizza
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material.icons.sharp.LocalPizza
-import androidx.compose.material.icons.twotone.*
+import androidx.compose.material.icons.rounded.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import pgm.poolp.overwhelming.ui.home.HomeScreen
+import pgm.poolp.overwhelming.screens.HomeScreen
 import pgm.poolp.overwhelming.ui.theme.OverwhelmingTheme
+import pgm.poolp.overwhelming.viewmodels.FoodViewModel
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private lateinit var foodViewModel: FoodViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
+            foodViewModel = hiltViewModel()
+            foodViewModel.decreaseFoodOccurrences()
+
             OverwhelmingTheme {
                 Scaffold(
                     backgroundColor = MaterialTheme.colors.primarySurface,
+                    floatingActionButton = {
+
+                        val imageVector: ImageVector = when ((0..7).random()) {
+                            0 -> Icons.Rounded.LocalPizza
+                            1 -> Icons.Rounded.Cake
+                            2 -> Icons.Rounded.LunchDining
+                            3 -> Icons.Rounded.Coffee
+                            4 -> Icons.Rounded.BakeryDining
+                            5 -> Icons.Rounded.Icecream
+                            6 -> Icons.Rounded.BreakfastDining
+                            7 -> Icons.Rounded.EmojiFoodBeverage
+                            else -> {Icons.Rounded.Coffee}
+                        }
+
+                        ExtendedFloatingActionButton(
+                            text = { Text(text = "Overwhelming food") },
+                            icon = { Icon(imageVector,"") },
+                            onClick = { foodViewModel.increaseFoodOccurrencesWithTen() })
+                    },
                     topBar = {
                         HomeTopAppBar(elevation = 0.dp)
                     }
                 ) { innerPaddingModifier ->
-                    HomeScreen(modifier = Modifier.padding(innerPaddingModifier))
+                    HomeScreen(
+                        modifier = Modifier.padding(innerPaddingModifier),
+                        viewModel = foodViewModel)
                 }
             }
         }
+
     }
 }
 
@@ -106,7 +132,7 @@ private fun HomeTopAppBar(
                     modifier = Modifier
                 )
                 Icon(
-                    painter = rememberVectorPainter(Icons.Outlined.RiceBowl),
+                    painter = rememberVectorPainter(Icons.Outlined.BreakfastDining),
                     contentDescription = title,
                     tint = MaterialTheme.colors.onBackground,
                     modifier = Modifier

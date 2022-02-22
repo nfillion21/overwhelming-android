@@ -2,17 +2,17 @@ package pgm.poolp.overwhelming.data
 
 import android.util.Log
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.*
-import java.io.IOException
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.core.intPreferencesKey
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import pgm.poolp.overwhelming.data.UserPreferencesRepository.PreferencesKeys.FOOD_OCCURENCES
+import java.io.IOException
 import javax.inject.Inject
-
-data class UserPreferences(
-    val showVillains: Int
-)
 
 /**
  * Class that handles saving and retrieving user preferences
@@ -28,7 +28,7 @@ class UserPreferencesRepository @Inject constructor(private val dataStore: DataS
     /**
      * Get the user preferences flow.
      */
-    val userPreferencesFlow: Flow<UserPreferences> = dataStore.data
+    val foodOccurrencesFlow: Flow<Int> = dataStore.data
         .catch { exception ->
             // dataStore.data throws an IOException when an error is encountered when reading data
             if (exception is IOException) {
@@ -37,34 +37,30 @@ class UserPreferencesRepository @Inject constructor(private val dataStore: DataS
             } else {
                 throw exception
             }
-        }.map { preferences ->
-            mapUserPreferences(preferences)
+        }
+        .map { preferences ->
+            // No type safety.
+            preferences[FOOD_OCCURENCES] ?: 0
         }
 
     suspend fun decreaseFoodOccurrences() {
-        dataStore.edit { preferences ->
 
-            val occurrences = preferences[PreferencesKeys.FOOD_OCCURENCES] ?: 0
-            if (occurrences > 0)
-            {
-                preferences[PreferencesKeys.FOOD_OCCURENCES] = occurrences - 1
+        while(true) {
+            dataStore.edit { preferences ->
+                val occurrences = preferences[FOOD_OCCURENCES] ?: 0
+                if (occurrences > 0)
+                {
+                    preferences[FOOD_OCCURENCES] = occurrences - 1
+                }
+                delay(500) // Suspends the coroutine for some time
             }
         }
     }
 
     suspend fun increaseFoodOccurrencesWithTen() {
         dataStore.edit { preferences ->
-
-            val occurrences = preferences[PreferencesKeys.FOOD_OCCURENCES] ?: 0
-            if (occurrences > 0)
-            {
-                preferences[PreferencesKeys.FOOD_OCCURENCES] = occurrences + 10
-            }
+            val occurrences = preferences[FOOD_OCCURENCES] ?: 0
+            preferences[FOOD_OCCURENCES] = occurrences + 10
         }
-    }
-
-    private fun mapUserPreferences(preferences: Preferences): UserPreferences {
-        val foodOccurrences = preferences[PreferencesKeys.FOOD_OCCURENCES] ?: 0
-        return UserPreferences(foodOccurrences)
     }
 }
