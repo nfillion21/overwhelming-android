@@ -100,4 +100,8 @@ dependencies {
 
     implementation (platform(Dependencies.firebasePlatform))
     implementation (Dependencies.firebaseAnalytics)
+
+    //implementation(Dependencies.firebaseDatabase)
+    //implementation("com.google.firebase:firebase-database:19.2.1")
+    implementation(Dependencies.firebaseDatabase)
 }

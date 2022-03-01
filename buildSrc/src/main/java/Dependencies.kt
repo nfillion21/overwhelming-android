@@ -50,4 +50,7 @@ object Dependencies {
 
     val firebasePlatform by lazy {"com.google.firebase:firebase-bom:${Versions.firebaseVersion}"}
     val firebaseAnalytics by lazy {"com.google.firebase:firebase-analytics-ktx"}
+    val firebaseDatabase by lazy {"com.google.firebase:firebase-database-ktx"}
+
+    //val firebaseDatabase by lazy {"com.google.firebase:firebase-database:${Versions.firebaseDatabaseVersion}"}
 }

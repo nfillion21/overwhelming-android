@@ -1,6 +1,7 @@
 buildscript {
     dependencies {
         classpath("com.google.dagger:hilt-android-gradle-plugin:${Versions.hiltVersion}")
+        classpath("com.google.gms:google-services:4.3.3")
         classpath ("com.google.gms:google-services:${Versions.googleServices}")
     }
 }

@@ -2,7 +2,7 @@ object Versions {
 
     const val gradlePlugin = "4.2.1"
     const val kotlin = "1.5.0"
-    const val googleServices = "4.3.10"
+    const val googleServices = "4.3.3"
 
     const val composeVersion = "1.0.5"
     const val coreAndroidX = "1.7.0"
@@ -22,4 +22,5 @@ object Versions {
     const val datastoreVersion = "1.0.0"
 
     const val firebaseVersion = "29.1.0"
+
 }
