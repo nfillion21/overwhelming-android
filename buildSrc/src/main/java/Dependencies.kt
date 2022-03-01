@@ -48,10 +48,6 @@ object Dependencies {
 
     val datastorePreferences by lazy {"androidx.datastore:datastore-preferences:${Versions.datastoreVersion}"}
 
-    //annotationProcessor("androidx.room:room-compiler:$roomVersion")
-
-    // To use Kotlin annotation processing tool (kapt)
-    //kapt("androidx.room:room-compiler:$roomVersion")
-    // To use Kotlin Symbolic Processing (KSP)
-    //ksp("androidx.room:room-compiler:$roomVersion")
+    val firebasePlatform by lazy {"com.google.firebase:firebase-bom:${Versions.firebaseVersion}"}
+    val firebaseAnalytics by lazy {"com.google.firebase:firebase-analytics-ktx"}
 }
