@@ -1,5 +1,6 @@
 package pgm.poolp.overwhelming.data
 
+import androidx.datastore.preferences.core.edit
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -8,29 +9,30 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.callbackFlow
 
 class OverwhelmingRepository {
 
     val dbReference = Firebase.database("https://overwhelming-42f25-default-rtdb.europe-west1.firebasedatabase.app/").getReference("overwhelming")
-    //databaseReference = db.getReference("overwhelming")
+    var number = 0
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    fun getOverwhelming() = callbackFlow<Int>{
+    fun getOverwhelming() = callbackFlow {
 
         dbReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
                 val value = dataSnapshot.getValue<Int>()
                 //Log.d(TAG, "Value is: $value")
                 if (value == null) {
                     //offer(-1)
-                    trySend(0)
+                    number = 0
+                    trySend(number)
                 }
                 else {
                     //offer(value)
-                    trySend(value)
+                    number = value
+                    trySend(number)
                 }
             }
 
@@ -38,11 +40,30 @@ class OverwhelmingRepository {
                 // Failed to read value
                 //Log.w(TAG, "Failed to read value.", error.toException())
                 //offer(-1)
-                trySend(0)
+                number = 0
+                trySend(number)
             }
         })
 
         awaitClose {
         }
     }
+
+    fun increaseWithTen() {
+        number += 10
+        dbReference.setValue(number)
+    }
+
+    suspend fun decreaseFood() {
+
+        while(true) {
+            if (number > 0)
+            {
+                number -= 1
+                dbReference.setValue(number)
+            }
+            delay(500) // Suspends the coroutine for some time
+        }
+    }
+
 }

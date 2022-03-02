@@ -32,17 +32,14 @@ import pgm.poolp.overwhelming.viewmodels.FoodViewModel
 class MainActivity : ComponentActivity() {
 
     private lateinit var foodViewModel: FoodViewModel
-    private lateinit var databaseReference: DatabaseReference
     private val TAG = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //database = Firebase.database.reference
-
         setContent {
             foodViewModel = hiltViewModel()
-            foodViewModel.decreaseFoodOccurrences()
+            foodViewModel.decreaseSharedFoodOccurrences()
 
             OverwhelmingTheme {
                 Scaffold(
@@ -80,73 +77,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun increaseByTen() {
-        foodViewModel.increaseFoodOccurrencesWithTen()
-
-        //val db = Firebase.database("https://overwhelming-42f25-default-rtdb.europe-west1.firebasedatabase.app/")
-        //val myRef = database.getReference("overwhelming")
-        databaseReference.setValue(2)
-
-        //database.child("overwhelming").setValue(1)
-
-
-        // Read from the database
-        /*
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                val value = dataSnapshot.getValue<String>()
-                Log.d(TAG, "Value is: $value")
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException())
-            }
-        })
-         */
-
-
-
-        /*
-        val db = Firebase.firestore
-        // Create a new user with a first and last name
-        val user = hashMapOf(
-            "first" to "Ada",
-            "last" to "Lovelace",
-            "born" to 1815
-        )
-
-// Add a new document with a generated ID
-        db.collection("users")
-            .add(user)
-            .addOnSuccessListener { documentReference ->
-                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-            }
-            .addOnFailureListener { e ->
-                Log.w(TAG, "Error adding document", e)
-            }
-        */
-
-        /*
-        val user = hashMapOf(
-            "first" to "Alan",
-            "middle" to "Mathison",
-            "last" to "Turing",
-            "born" to 1912
-        )
-
-// Add a new document with a generated ID
-        db.collection("users")
-            .add(user)
-            .addOnSuccessListener { documentReference ->
-                //Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-            }
-            .addOnFailureListener { e ->
-                //Log.w(TAG, "Error adding document", e)
-            }
-         */
-
+        foodViewModel.increaseSharedFoodOccurrencesWithTen()
     }
 }
 

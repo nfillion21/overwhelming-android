@@ -17,8 +17,7 @@ import javax.inject.Inject
 @OptIn(InternalCoroutinesApi::class)
 @HiltViewModel
 class FoodViewModel @Inject internal constructor(
-    private val userPreferencesRepository: UserPreferencesRepository,
-    private val overwhelmingRepository: OverwhelmingRepository
+    private val userPreferencesRepository: UserPreferencesRepository
 ) : ViewModel() {
 
     /*
@@ -28,17 +27,31 @@ class FoodViewModel @Inject internal constructor(
     }
     */
 
-    fun getOverwhelming() = overwhelmingRepository.getOverwhelming()
+    val overwhelmingRepository = OverwhelmingRepository()
 
-    fun decreaseFoodOccurrences() {
+    fun getOverwhelming() :Flow<Int> {
+        return overwhelmingRepository.getOverwhelming()
+    }
+
+    fun increaseSharedFoodOccurrencesWithTen() {
+        overwhelmingRepository.increaseWithTen()
+    }
+
+    fun decreaseSharedFoodOccurrences() {
         viewModelScope.launch {
-            userPreferencesRepository.decreaseFoodOccurrences()
+            overwhelmingRepository.decreaseFood()
         }
     }
 
     fun increaseFoodOccurrencesWithTen() {
         viewModelScope.launch {
             userPreferencesRepository.increaseFoodOccurrencesWithTen()
+        }
+    }
+
+    fun decreaseFoodOccurrences() {
+        viewModelScope.launch {
+            userPreferencesRepository.decreaseFoodOccurrences()
         }
     }
 

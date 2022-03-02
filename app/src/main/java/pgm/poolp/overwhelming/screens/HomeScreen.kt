@@ -43,7 +43,6 @@ fun HomeScreen(
                 .padding(24.dp)
                 //.weight(1f)
         ) {
-            //val k by viewModel.foodOccurrences.collectAsState(initial = 0)
             val k by viewModel.getOverwhelming().collectAsState(initial = 0)
             for (i in k downTo 1)
             {
