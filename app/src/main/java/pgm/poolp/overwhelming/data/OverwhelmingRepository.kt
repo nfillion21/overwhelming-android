@@ -1,6 +1,5 @@
 package pgm.poolp.overwhelming.data
 
-import androidx.datastore.preferences.core.edit
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -9,10 +8,10 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.callbackFlow
+import javax.inject.Inject
 
-class OverwhelmingRepository {
+class OverwhelmingRepository @Inject constructor () {
 
     val dbReference = Firebase.database("https://overwhelming-42f25-default-rtdb.europe-west1.firebasedatabase.app/").getReference("overwhelming")
     var number = 0
@@ -54,15 +53,11 @@ class OverwhelmingRepository {
         dbReference.setValue(number)
     }
 
-    suspend fun decreaseFood() {
-
-        while(true) {
-            if (number > 0)
-            {
-                number -= 1
-                dbReference.setValue(number)
-            }
-            delay(500) // Suspends the coroutine for some time
+    fun decreaseFood() {
+        if (number > 0)
+        {
+            number -= 1
+            dbReference.setValue(number)
         }
     }
 

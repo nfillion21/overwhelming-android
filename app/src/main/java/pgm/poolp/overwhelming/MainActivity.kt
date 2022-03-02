@@ -3,6 +3,7 @@ package pgm.poolp.overwhelming
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -39,10 +40,10 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             foodViewModel = hiltViewModel()
-            foodViewModel.decreaseSharedFoodOccurrences()
 
             OverwhelmingTheme {
                 Scaffold(
+                    Modifier.clickable { foodViewModel.decreaseSharedFoodOccurrences() },
                     backgroundColor = MaterialTheme.colors.primarySurface,
                     floatingActionButton = {
 
@@ -62,7 +63,8 @@ class MainActivity : ComponentActivity() {
                         ExtendedFloatingActionButton(
                             text = { Text(text = "Overwhelming food") },
                             icon = { Icon(imageVector,"") },
-                            onClick = { increaseByTen() })
+                            onClick = { increaseByTen() }
+                        )
                     },
                     topBar = {
                         HomeTopAppBar(elevation = 0.dp)

@@ -17,17 +17,11 @@ import javax.inject.Inject
 @OptIn(InternalCoroutinesApi::class)
 @HiltViewModel
 class FoodViewModel @Inject internal constructor(
-    private val userPreferencesRepository: UserPreferencesRepository
+    private val userPreferencesRepository: UserPreferencesRepository,
+    private val overwhelmingRepository: OverwhelmingRepository,
 ) : ViewModel() {
 
-    /*
-    init {
-        val db = Firebase.database("https://overwhelming-42f25-default-rtdb.europe-west1.firebasedatabase.app/")
-        databaseReference = db.getReference("overwhelming")
-    }
-    */
-
-    val overwhelmingRepository = OverwhelmingRepository()
+    //val overwhelmingRepository = OverwhelmingRepository()
 
     fun getOverwhelming() :Flow<Int> {
         return overwhelmingRepository.getOverwhelming()
@@ -38,9 +32,7 @@ class FoodViewModel @Inject internal constructor(
     }
 
     fun decreaseSharedFoodOccurrences() {
-        viewModelScope.launch {
-            overwhelmingRepository.decreaseFood()
-        }
+        overwhelmingRepository.decreaseFood()
     }
 
     fun increaseFoodOccurrencesWithTen() {
